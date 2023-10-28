@@ -1,0 +1,4 @@
+{
+  "python.createEnvironment.trigger": "prompt",
+  "python.terminal.activateEnvInCurrentTerminal": true
+}
