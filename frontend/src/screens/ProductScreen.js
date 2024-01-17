@@ -12,7 +12,7 @@ function ProductScreen() {
 
     const [qty, SetQty] = useState(1);
     const dispatch = useDispatch();
-    const history = useNavigate();
+    const history = useNavigate(); //use to replace history.push as history is deprecated
     const productDetails = useSelector(state => state.productDetails);
     const { loading, error, product } = productDetails;
     const { id } = useParams();
