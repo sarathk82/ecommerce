@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { Link, useParams, useSearchParams, useNavigate, useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Button, Card, Form } from 'react-bootstrap';
-import Rating from '../component/Rating';
 import Message from '../component/Message';
 import { addToCart, removeFromCart } from '../actions/CartActions';
 import { useSelector, useDispatch } from 'react-redux';
@@ -28,7 +27,7 @@ function CartScreen() {
     };
 
     const checkoutHandler = () => {
-        navigate('/login?redirect=shipping');
+        navigate('/shipping');
     };
 
     return (
@@ -93,7 +92,7 @@ function CartScreen() {
                 <Card>
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
-                            <h2>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</h2>
+                            <h2>Subtotal ({cartItems.reduce((acc, item) => acc + Number(item.qty), 0)}) items</h2>
                             ${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
                         </ListGroup.Item>
                     </ListGroup>
