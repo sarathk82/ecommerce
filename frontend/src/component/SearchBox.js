@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { listProducts } from '../actions/ProductActions';
+
+
 
 
 function SearchBox() {
 
     const [keyword, setKeyword] = useState('');
     const history = useNavigate();
-    const dispatch = useDispatch();
+
     const location = useLocation();
 
     const submitHandlder = (e) => {
         e.preventDefault();
         if (keyword) {
-            dispatch(listProducts(keyword));
-            history(`/?search=${keyword}`);
+            history(`/?search=${keyword}&page=1`);
         } else {
             history(location.pathname);
         }
