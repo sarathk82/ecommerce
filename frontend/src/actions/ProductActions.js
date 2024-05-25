@@ -20,6 +20,16 @@ import {
     PRODUCT_DELETE_SUCCESS,
     PRODUCT_DELETE_FAIL,
 
+    PRODUCT_CREATE_REQUEST,
+    PRODUCT_CREATE_SUCCESS,
+    PRODUCT_CREATE_FAIL,
+
+    PRODUCT_UPDATE_REQUEST,
+    PRODUCT_UPDATE_SUCCESS,
+    PRODUCT_UPDATE_FAIL,
+    PRODUCT_UPDATE_RESET
+
+
 } from '../constants/ProductConstants';
 
 import axios from 'axios';
@@ -116,6 +126,78 @@ export const createProductReview = (productId, review) => async (dispatch, getSt
     }
 };
 
+export const createProduct = () => async (dispatch, getState) => {
+    try {
+        dispatch({ type: PRODUCT_CREATE_REQUEST });
+
+        const {
+            userLogin: { userInfo },
+        } = getState();
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`,
+            },
+        };
+
+        const { data } = await axios.post(`/api/products/create/`, {}, config);
+
+        dispatch({
+            type: PRODUCT_CREATE_SUCCESS,
+            payload: data
+        });
+
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_CREATE_FAIL,
+            payload:
+                error.response && error.response.data.detail
+                    ? error.response.data.detail
+                    : error.message,
+        });
+    }
+};
+
+
+export const updateProduct = (product) => async (dispatch, getState) => {
+    try {
+        dispatch({ type: PRODUCT_UPDATE_REQUEST });
+
+        const {
+            userLogin: { userInfo },
+        } = getState();
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`,
+            },
+        };
+
+        const { data } = await axios.put(`/api/products/update/${product._id}`, product, config);
+
+        dispatch({
+            type: PRODUCT_UPDATE_SUCCESS,
+            payload: data
+        });
+
+        dispatch({
+            type: PRODUCT_DETAILS_SUCCESS, payload: data
+        });
+
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_UPDATE_FAIL,
+            payload:
+                error.response && error.response.data.detail
+                    ? error.response.data.detail
+                    : error.message,
+        });
+    }
+};
+
+
 export const deleteProduct = (id) => async (dispatch, getState) => {
     try {
         dispatch({
@@ -139,7 +221,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
 
     } catch (error) {
         dispatch({
-            type: PRODUCT_DETAILS_FAIL,
+            type: PRODUCT_DELETE_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message : error.message
         });
     }

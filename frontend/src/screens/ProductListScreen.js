@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../component/Message';
 import Loader from '../component/Loader';
 import Paginate from '../component/Paginate';
-import { listProducts, deleteProduct } from '../actions/ProductActions';
+import { listProducts, deleteProduct, createProduct } from '../actions/ProductActions';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { PRODUCT_CREATE_RESET } from '../constants/ProductConstants';
 
@@ -21,6 +21,9 @@ function ProductListScreen() {
     const productDelete = useSelector(state => state.productDelete);
     const { error: errorDelete, loading: loadingDelete, success } = productDelete;
 
+    const productCreate = useSelector(state => state.productCreate);
+    const { error: errorCreate, loading: loadingCreate, success: successCreate, products: createdProduct } = productCreate;
+
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo } = userLogin;
 
@@ -33,11 +36,15 @@ function ProductListScreen() {
         if (!userInfo.isAdmin) {
             navigate('/login');
         }
+
+        if (successCreate) {
+            navigate(`/admin/product/${createdProduct._id}/edit`);
+        }
         else {
             dispatch(listProducts(keyword));
         }
 
-    }, [dispatch, navigate, userInfo, keyword, success]);
+    }, [dispatch, navigate, userInfo, keyword, success, successCreate, createdProduct]);
 
 
     const deleteHandler = (id) => {
@@ -46,9 +53,8 @@ function ProductListScreen() {
         }
     };
 
-    const createProductHandler = (product) => {
-        //create product
-        navigate('/admin/product/create');
+    const createProductHandler = () => {
+        dispatch(createProduct());
 
     };
 
@@ -69,6 +75,10 @@ function ProductListScreen() {
 
             {loadingDelete && <Loader />}
             {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+
+            {loadingCreate && <Loader />}
+            {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
+
             {loading ? <Loader />
                 : error ? <Message variant='danger' >{error}</Message>
                     : (
