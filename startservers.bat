@@ -1,2 +1,2 @@
-start cmd /k "cd frontend && npm start"
-start cmd /k "cd backend && python manage.py runserver"
+start cmd /k "cd django/frontend && npm start"
+start cmd /k "cd django && python manage.py runserver"

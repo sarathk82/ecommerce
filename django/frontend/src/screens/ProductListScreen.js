@@ -22,7 +22,7 @@ function ProductListScreen() {
     const { error: errorDelete, loading: loadingDelete, success } = productDelete;
 
     const productCreate = useSelector(state => state.productCreate);
-    const { error: errorCreate, loading: loadingCreate, success: successCreate, products: createdProduct } = productCreate;
+    const { error: errorCreate, loading: loadingCreate, success: successCreate, product: createdProduct } = productCreate;
 
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo } = userLogin;

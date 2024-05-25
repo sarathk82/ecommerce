@@ -33,7 +33,7 @@ function Header() {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <SearchBox />
 
-                        <Nav className='mr-auto'>
+                        <Nav className='ml-auto'>
                             <Nav.Link href="/cart"><i className='fas fa-shopping-cart'></i>Cart</Nav.Link>
 
                             {userInfo && Object.keys(userInfo).length ? (
