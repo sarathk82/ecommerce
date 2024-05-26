@@ -6,7 +6,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import { NavDropdown } from 'react-bootstrap';
 import { logout } from '../actions/UserActions';
 import SearchBox from './SearchBox';
-import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 
 

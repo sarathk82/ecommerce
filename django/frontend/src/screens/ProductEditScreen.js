@@ -24,7 +24,6 @@ const EditProductScreen = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const history = useNavigate();
-    const [message, setMessage] = useState('');
 
 
     const productDetails = useSelector(state => state.productDetails);

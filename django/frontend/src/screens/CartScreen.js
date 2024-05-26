@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 function CartScreen() {
     const { id } = useParams();
-    const [searchParams, setSearchParams] = useSearchParams();
+    const searchParams  = useSearchParams();
     const qty = searchParams.get('qty');
     const dispatch = useDispatch();
     const cart = useSelector(state => state.cart);

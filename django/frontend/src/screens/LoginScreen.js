@@ -34,6 +34,7 @@ function LoginScreen() {
         e.preventDefault();
         //Dispatch Login
         dispatch(login(email, password));
+        
     };
 
     return (

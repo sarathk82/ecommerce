@@ -37,7 +37,7 @@ function App() {
         <Container>
           <Routes>
 
-            <Route exact path='/' element={<HomeScreen />} />
+            <Route path='/' element={<HomeScreen />} />
             <Route path='/login' element={<LoginScreen />} />
             <Route path='/register' element={<RegisterScreen />} />
             <Route path='/product/:id' element={<ProductScreen />} />

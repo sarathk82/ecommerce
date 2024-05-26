@@ -44,8 +44,10 @@ export const userLoginReducer = (state = {}, action) => {
             return { loading: false, success: false, error: action.payload };
 
         case USER_LOGIN_SUCCESS:
-            return { loading: false, success: true };
+            return { loading: false, userInfo: action.payload };
 
+        case USER_LOGOUT:
+            return {};
 
         default:
             return state;
@@ -102,6 +104,9 @@ export const userRegisterReducer = (state = {}, action) => {
 
         case USER_REGISTER_SUCCESS:
             return { loading: false, userUpdInfo: action.payload };
+
+        case USER_LOGOUT:
+            return {};
 
         default:
             return state;

@@ -20,7 +20,7 @@ function PlaceOrderScreen() {
 
 
     cart.itemsPrice = cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2);
-    cart.shippingPrice = (cart.itemsPrice > 100 || cart.itemsPrice == 0 ? 0 : 10).toFixed(2);
+    cart.shippingPrice = (cart.itemsPrice > 100 || cart.itemsPrice ===0 ? 0 : 10).toFixed(2);
     cart.taxPrice = Number((0.15 * cart.itemsPrice).toFixed(2));
     cart.totalPrice = Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice);
 
@@ -158,7 +158,7 @@ function PlaceOrderScreen() {
                             <ListGroup.Item>
                                 <Button type='button'
                                     className='btn-block'
-                                    disabled={cart.cartItems == 0}
+                                    disabled={cart.cartItems === 0}
                                     onClick={placeOrder}
                                 >
                                     Place Order

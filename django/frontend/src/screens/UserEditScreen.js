@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../component/Message';
@@ -41,7 +41,7 @@ const EditUserScreen = () => {
             if (!user || !user.name || user._id !== Number(id)) {
 
                 dispatch(getUserProfile(id));
-                console.log(name);
+              
 
             } else {
                 setName(user.name);
@@ -51,7 +51,7 @@ const EditUserScreen = () => {
         }
 
 
-    }, [user, successUpdate, dispatch]);
+    }, [user, id, successUpdate, dispatch,history]);
 
     const SubmitHandler = (e) => {
         e.preventDefault();
@@ -68,6 +68,8 @@ const EditUserScreen = () => {
             </Link>
             <FormContainer>
                 <h1>Edit User</h1>
+                {loadingUpdate && <Loader />}
+                {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
                 {loading && <Loader />}
                 {message && <Message variant='info'>{message}</Message>}
                 {error && <Message variant='danger'>{error}</Message>}

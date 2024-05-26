@@ -6,7 +6,7 @@ import Message from '../component/Message';
 import Loader from '../component/Loader';
 import Paginate from '../component/Paginate';
 import { listProducts, deleteProduct, createProduct } from '../actions/ProductActions';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { PRODUCT_CREATE_RESET } from '../constants/ProductConstants';
 
 function ProductListScreen() {
